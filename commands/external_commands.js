@@ -2,13 +2,14 @@ const cat = (args) => {
   try {
     const path = args[0];
     console.log(Deno.readTextFileSync(path));
-  } catch (err) {
+  } catch (_err) {
     console.log("No such file or directory");
   }
 };
 
 const ls = () => {
-  console.log("ls command executed");
+  // console.log("ls command executed");
+  console.log(Deno.run({ cmd: ["ls", "-l", "."] }));
 };
 
 const add = (args) => {
@@ -17,7 +18,7 @@ const add = (args) => {
       sum + num
     );
     console.log(sum);
-  } catch (error) {
+  } catch (_err) {
     console.log("Give at least 1 number");
   }
 };

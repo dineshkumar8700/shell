@@ -1,9 +1,10 @@
-import { internalCommands } from "./commands/internalCommand.js";
-import { externalCommands } from "./commands/externalCommand.js";
+import { internalCommands } from "./commands/internal_commands.js";
+import { externalCommands } from "./commands/external_commands.js";
+import { help } from "./help.js";
 
 const executeCommand = (command) => {
   const { cmd, args } = command;
-
+  if (cmd === "--help") return help();
   if (internalCommands[cmd]) {
     return internalCommands[cmd](args);
   }
@@ -20,8 +21,9 @@ const parseCommand = (command) => {
 };
 
 const main = () => {
+  console.log("Welcome Back. Type --help to see available commands");
   while (true) {
-    const command = prompt("\nType the command you want to execute:");
+    const command = prompt("\n> ");
     const parsedCommand = parseCommand(command);
     executeCommand(parsedCommand);
   }
