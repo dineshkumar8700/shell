@@ -2,20 +2,28 @@ import { internalCommands } from "./commands/internalCommand.js";
 import { externalCommands } from "./commands/externalCommand.js";
 
 const executeCommand = (command) => {
-  if (internalCommands[command]) {
-    return internalCommands[command]();
+  const cmd = command["cmd"];
+
+  if (internalCommands[cmd]) {
+    return internalCommands[cmd]();
   }
-  if (externalCommands[command]) {
-    return externalCommands[command]();
+  if (externalCommands[cmd]) {
+    return externalCommands[cmd]();
   }
 
-  console.log("Command not found:", command);
+  console.log("Command not found:", cmd);
+};
+
+const parseCommand = (command) => {
+  const [cmd, ...args] = command.trim().split(" ");
+  return args.length === 0 ? { cmd } : { cmd, args };
 };
 
 const main = () => {
   while (true) {
     const command = prompt("Type the command you want to execute:");
-    executeCommand(command);
+    const parsedCommand = parseCommand(command);
+    executeCommand(parsedCommand);
   }
 };
 
