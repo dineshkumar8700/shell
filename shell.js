@@ -1,25 +1,12 @@
-const ls = () => {
-  console.log("ls command executed");
-};
-
-const cat = () => {
-  console.log("cat command executed");
-};
-
-const internalCommands = {
-  ls,
-};
-
-const externalCommand = {
-  cat,
-};
+import { internalCommands } from "./commands/internalCommand.js";
+import { externalCommands } from "./commands/externalCommand.js";
 
 const executeCommand = (command) => {
   if (internalCommands[command]) {
     return internalCommands[command]();
   }
-  if (externalCommand[command]) {
-    return externalCommand[command]();
+  if (externalCommands[command]) {
+    return externalCommands[command]();
   }
 
   console.log("Command not found:", command);
