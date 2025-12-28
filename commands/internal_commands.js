@@ -6,6 +6,11 @@ const echo = (args) => {
   }
 };
 
+const pwd = () => {
+  console.log(Deno.cwd());
+};
+
 export const internalCommands = {
   echo,
+  pwd,
 };
